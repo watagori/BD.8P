@@ -1,4 +1,4 @@
-// - T1.mixins v0.1.07
+// * T1.mixins v0.1.22
 // Notifications / Scrollbar / Button / Default Variables
 
 // -- Theme notifications
@@ -29,7 +29,7 @@
 // Notification (user settings only)
 @mixin note_settings ($text, $display:block) {
   
-  .layer-3QrUeG:not(.baseLayer-35bLyl) .socialLinks-3jqNFy::before {
+  .layer-86YKbF:not(.baseLayer-W6S8cY) .socialLinks-2DELRE::before {
     content: $text ;
     display: $display ;
     
@@ -43,7 +43,7 @@
     text-align: center ;
     font-size: 14px ;
     font-weight: 600 ;
-    line-height: 18px ;
+    line-height: 20px ;
     letter-spacing: .5px ;
     z-index: 2000 ;
     white-space: break-spaces ;
@@ -51,7 +51,7 @@
     @include shadow_effect("box_2");
   }
   
-  .platform-win .layer-3QrUeG .socialLinks-3jqNFy::before {
+  .platform-win .layer-86YKbF .socialLinks-2DELRE::before {
     top: 22px ;
   }
 }
@@ -69,12 +69,14 @@
   }
 
   &::-webkit-scrollbar-track { 
-    background-color: transparent !important ;
+    // background-color: transparent !important ; 0.5.62 testing
+    background-color: transparent ;
     border-color: transparent ;
   }
   
   &::-webkit-scrollbar-track-piece {
-    background-color: transparent !important ;
+    // background-color: transparent !important ; 0.5.62 testing
+    background-color: transparent ;
     border: none ;
   }
 
@@ -171,12 +173,16 @@
 }
 
 
-// Inline unread indicator 
-@mixin unread_indicator_inline () {
-  background-color: transparent !important ;
-  border-bottom: 2px solid var(--red) ;
-  border-radius: 0 ;
-  color: var(--text-normal) ;
+// Unread mentions badge (inline) | @include Mentions_icon();
+@mixin Mentions_icon ($class:false) {
+
+  #{if($class, $class, "&")} {
+    background-color: transparent !important ;
+    border-bottom: 2px solid var(--red) ;
+    border-radius: 0 ;
+    color: var(--text-normal) ;
+    box-shadow: none ;
+  }
 }
 
 
@@ -204,6 +210,14 @@
   @else if $type == "server_1" {
     filter: drop-shadow( 2px 2px 3px black );
   }
+  
+  @else if $type == "text_1" {
+    text-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.75);
+  }
+  
+  @else if $type == "text_2" {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  }
 }
 
 
@@ -224,13 +238,15 @@
   --show-gif-btn: 1 ;
   --show-sticker-btn: 0 ;
   --show-emoji-btn: 1 ;
+  
+  --show-home-tabs: 1 ;
+  --show-serverboost-stats: 1 ;
 
   --always-show-voicecontrols: 0 ;
 
   --Font: Whitney,"Helvetica Neue",Helvetica,Arial,sans-serif ;
   
   // Intern
-  
   --BGM_Blur: blur(calc(var(--Main_Background_blur, 0) / 100 * 1px));
   --BGM_Brightness: brightness(calc((var(--Main_Brightness, 80) / 100)));
   

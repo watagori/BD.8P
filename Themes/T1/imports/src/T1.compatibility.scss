@@ -1,17 +1,17 @@
-// - T1.compatibility v0.1.043
+// * T1.compatibility v0.1.2
 // Compatibility with plugins
 
 
-// - Hide Channels by Farcrada (v1.1.0)
-// - FriendNotifications by DevilBro (v1.7.5)
-// - ReadAllNotificationsButton by DevilBro (v1.6.8)
-// - SpotifyControls by DevilBro (v1.1.7)
-// - CollapsibleUI by programmer2514 (v1.1.0)
-// - ChannelTabs by l0c4lh057 (v2.5.1)
+// - Hide Channels by Farcrada (v2.1.0)
+// - FriendNotifications by DevilBro (v1.8.1)
+// - ReadAllNotificationsButton by DevilBro (v1.7.0)
+// - SpotifyControls by DevilBro (v1.2.4)
+// - CollapsibleUI by programmer2514 (v4.2.0)
+// - ChannelTabs by l0c4lh057 (v2.5.5)
+// - ChannelDms by Strencher (v1.2.0)
 
 
-
-// -- Hide Channels by Farcrada (v1.2.1)
+// -- Hide Channels by Farcrada (v2.1.0)
 // - Show/Hide btn
 #toggleChannels {
   filter: brightness(.6) ;
@@ -23,29 +23,29 @@
 }
 
 // - Server channel sidebar
-.sidebar-2K8pFh {
+.sidebar-1tnWFu {
   transition: none !important ;
   
-  // Server channel titlebar when sidebar is hidden
-  &.hideChannelElement + .chat-3bRxxu .title-3qD0b- {
-    margin-left: 240px ;
-    width: auto ;
+  // Sidebar hidden
+  &.hideChannelElement + div {
     
-    // Channel name
-    .title-29uC1r { 
-      display: flex ;
-    } 
-  }
-  
-  &.hideChannelElement + .chat-3bRxxu .newMessagesBar-265mhP {
-    left: 240px ;
+    // Headerbar: chat, friendslist
+    .title-31SJ6t, .container-ZMc96U {
+      margin-left: 240px ;
+      width: auto ;
+
+      // Channel name
+      .title-17SveM { 
+        display: flex ;
+      } 
+    }
   }
 }
 
 
-// -- FriendNotifications by DevilBro (v1.7.5)
+// -- FriendNotifications by DevilBro (v1.8.1)
 // - Online friend counter
-.guilds-1SWlCJ .scroller-1Bvpku > .listItem-GuPuDH.friendsOnlineWrap-0gZ63m {
+.guilds-2JjMmN .friendsOnlineWrap-0gZ63m {
   display: flex !important ;
   position: absolute ;
   transform: rotate(90deg) translateX(-50%) ;
@@ -60,18 +60,18 @@
 }
 
 
-// -- ReadAllNotificationsButton by DevilBro (v1.6.8)
+// -- ReadAllNotificationsButton by DevilBro (v1.7.0)
 // - "Read all" btn
-.guilds-1SWlCJ .scroller-1Bvpku > .listItem-GuPuDH.frame-oXWS21 {
+.guilds-2JjMmN .frame-oXWS21 {
   display: flex !important ;
   position: absolute ;
   top: 0 ;
-  left: 0 ;
+  left: -15px ;
   z-index: 1 ;
 
   &, * { height: 20px ; width: 20px  }
 
-  .childWrapper-anI2G9 {
+  .childWrapper-1j_1ub {
     color: transparent ;
     background: none ;
     transform: rotate(90deg);
@@ -114,44 +114,33 @@
 }
 
 
-// -- SpotifyControls by DevilBro (v1.1.7)
+// -- SpotifyControls by DevilBro (v1.2.4)
 // - Sidebar control panel
-.panels-j1Uci_ > .container-6sXIoE { 
+.panels-3wFtMD .container-6sXIoE { 
   margin: 0px ;
   min-height: 44px ;
 
-  .button-14-BFJ { background: none }
+  .button-12Fmur { background: none }
 }
 
 
-// -- CollapsibleUI by programmer2514 (v1.1.0)
-// - Server channel sidebar
-.sidebar-2K8pFh[style="display: none;"] {
-  display: flex !important ;
-  width: 0 ;
+// -- CollapsibleUI by programmer2514 (v4.2.0)
+// - Serverbar when hidden
+.guilds-2JjMmN {
   
-  // Titlebar adjustments
-  + .chat-3bRxxu .container-1r6BKw {
-    margin-left: 240px ;
-    width: auto ;
-    
-    // Channel name
-    .title-29uC1r { 
-      display: flex ;
-    } 
+  &[style*="transition: width"] {
+    transition: width 0s !important ;
   }
   
-  + .chat-3bRxxu .newMessagesBar-265mhP {
-    left: 240px ;
-  }
-}
-
-// - Serverbar
-.guilds-1SWlCJ[style="display: none;"] + .base-3dtUhz {
+  &[style*="width: 0px;"] {
+    height: 0px ;
     
-  // Home search, Server settings
-  .searchBar-6Kv8R2, .container-1taM1r {
-    display: none ;
+    // Home search, Server settings
+    + .base-2jDfDU {
+      .searchBar-3TnChZ, .container-1-ERn5 {
+        display: none ;
+      }
+    }
   }
 }
 
@@ -258,8 +247,9 @@
     
     // Unread mentions 
     .channelTabs-mentionBadge:not(.channelTabs-noMention) {
-      @include unread_indicator_inline() ;
       margin-bottom: -2px ;
+      
+      @include Mentions_icon();
     }
   }
 }
@@ -328,9 +318,78 @@
   }
   
   // User profile panel
-  #channelTabs-container ~ .layers-3iHuyZ .panels-j1Uci_ > .container-3baos1 {
+  #channelTabs-container ~ .layers-OrUESM .panels-3wFtMD > .container-YkUktl {
     margin-left: 0 ;
     width: 240px ;
     padding: 0 8px ;
+  }
+}
+
+
+// -- ChannelDms by Strencher (v1.2.0)
+// - Server members/dms sidebar
+#app-mount .ChannelDms-channelmembers-wrap {
+  
+  // Nav header
+  .ChannelDms-channelmembers-header {
+    background: none ;
+    border: none ;
+    
+    .item-3XjbnG {
+      background: none ;
+    }
+  }
+  
+  .privateChannels-oVe7HL {
+    top: unset ;
+    margin-bottom: unset ;
+  }
+  
+  // Home search (reverse)
+  .searchBar-3TnChZ {
+    // reverse T1
+    position: relative;
+    width: unset;
+    right: unset;
+    bottom: unset;
+    padding: unset;
+    
+    // additional
+    height: 32px;
+    box-shadow: none ;
+    margin: 5px ;
+    
+    &:hover {
+      background: var(--background-modifier-hover) ;
+    }
+  }
+}
+
+// - Dm popouts
+#app-mount .ChannelDms-channelpopout-popout {
+  background: var(--background-secondary-alt);
+  
+  // Header
+  .ChannelDms-channelpopout-header {
+    background: var(--background-secondary-alt);
+  }
+  
+  // Collapse btn
+  .ChannelDms-channelpopout-collapseButton {
+    background: var(--background-secondary);
+  }
+  
+  // Messages scroller
+  .scrollerBase-_bVAAt {
+    @include scrollbar();
+    
+    -webkit-mask-image: none ;
+    background: var(--background-tertiary);
+  }
+  
+  // Text input
+  .form-3gdLxP {
+    margin-top: 0 ;
+    background: var(--background-secondary-alt);
   }
 }
